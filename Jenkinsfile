@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'buildin-node'
+        }
+    }
     tools {
         maven 'MAVEN3'
         jdk 'OracleJDK8'
@@ -14,7 +18,7 @@ pipeline {
         NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexus-login'
     }
-    
+
     stages {
         stage('Build') {
             steps {
