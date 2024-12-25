@@ -77,11 +77,11 @@ pipeline {
             steps {
                 nexusArtifactUploader(
                 nexusVersion: 'nexus3',
-                protocol: 'http',
-                nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
+                protocol: 'https,
+                nexusUrl: 'nexus.visibleone.app',
                 groupId: 'QA',
                 version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                repository: "${RELEASE_REPO}",
+                repository: 'vprofile-release',
                 credentialsId: "${NEXUS_LOGIN}",
                 artifacts: [
                     [artifactId: 'vprofileapp',
