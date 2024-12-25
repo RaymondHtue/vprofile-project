@@ -78,11 +78,11 @@ pipeline {
                 nexusArtifactUploader(
                 nexusVersion: 'nexus3',
                 protocol: 'http',
-                nexusUrl: '${NEXUSIP}:${NEXUSPORT}',
+                nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
                 groupId: 'QA',
-                version: '${env.BUILD_ID}-${env.BUILD_TIMESTAMP}',
-                repository: '${RELEASE_REPO}',
-                credentialsId: '9f56f9e2-6e77-4b0c-8324-8c214db7af78',
+                version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
+                repository: "${NEXUS_REPO}",
+                credentialsId: "${NEXUS_LOGIN}",
                 artifacts: [
                     [artifactId: 'vprofileapp',
                     classifier: '',
