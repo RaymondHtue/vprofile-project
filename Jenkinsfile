@@ -17,6 +17,7 @@ pipeline {
         NEXUSPORT = '8081'
         NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = '9f56f9e2-6e77-4b0c-8324-8c214db7af78'
+        NEXUS_URL = 'nexus.visibleone.app'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
     }
@@ -77,11 +78,11 @@ pipeline {
             steps {
                 nexusArtifactUploader(
                 nexusVersion: 'nexus3',
-                protocol: 'https',
-                nexusUrl: 'nexus.visibleone.app',
+                protocol: 'https,
+                nexusUrl: "${NEXUS_URL}",
                 groupId: 'QA',
                 version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                repository: 'vprofile-release',
+                repository: "${RELEASE_REPO}",
                 credentialsId: "${NEXUS_LOGIN}",
                 artifacts: [
                     [artifactId: 'vprofileapp',
