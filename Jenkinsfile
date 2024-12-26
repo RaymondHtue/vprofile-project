@@ -83,7 +83,7 @@ pipeline {
                 nexusUrl: "${NEXUSIP}:${NEXUSPORT}",
                 groupId: 'QA',
                 version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                repository: "${RESLEASE_REPO}",
+                repository: "${NEXUS_ARTIFACT_REPO}",
                 credentialsId: "${NEXUS_LOGIN}",
                 artifacts: [
                     [artifactId: 'vprofileapp',
