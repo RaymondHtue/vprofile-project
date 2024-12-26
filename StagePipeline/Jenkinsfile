@@ -21,6 +21,10 @@ pipeline {
         NEXUS_URL = 'nexus.visibleone.app'
         SONARSERVER = 'sonarserver'
         SONARSCANNER = 'sonarscanner'
+        registryCredential = 'ecr:us-east-1:aws-iam-vprofile-test'
+        appRegistry = '905399179552.dkr.ecr.us-east-1.amazonaws.com/vprofile'
+        vprofileRegistry = 'https://905399179552.dkr.ecr.us-east-1.amazonaws.com'
+
     }
 
     stages {
@@ -92,6 +96,24 @@ pipeline {
                     type: 'war']
                  ]
                 )
+            }
+        }
+        stage('Build App Image') {
+            steps {
+                script {
+                    dockerImage = docker.build("${appRegistry}:${env.BUILD_ID}-${env.BUILD_TIMESTAMP}, ./Docker-files/app/multistage/")
+                }
+            }
+        }
+        stage('Push App Image') {
+            steps {
+                script {
+                    docker.withRegistry("${vprofileRegistry}", "${registryCredential}") {
+                        //dockerImage.push("${env.BUILD_ID}-${env.BUILD_TIMESTAMP}")
+                        dockerImage.push("${env.BUILD_ID}")
+                        dockerImage.push("latest")
+                    }
+                }
             }
         }
     }
