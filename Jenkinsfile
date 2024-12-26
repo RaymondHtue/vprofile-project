@@ -17,7 +17,6 @@ pipeline {
         NEXUSIP = '192.168.1.133'
         NEXUSPORT = '8081'
         NEXUS_GRP_REPO = 'vpro-maven-group'
-        NEXUS_ARTIFACT_REPO = 'vprofile-release'
         NEXUS_LOGIN = '9f56f9e2-6e77-4b0c-8324-8c214db7af78'
         NEXUS_URL = 'nexus.visibleone.app'
         SONARSERVER = 'sonarserver'
@@ -84,7 +83,7 @@ pipeline {
                 nexusUrl: "${NEXUS_URL}",
                 groupId: 'QA',
                 version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-                repository: "${NEXUS_ARTIFACT_REPO}",
+                repository: "${RESLEASE_REPO}",
                 credentialsId: "${NEXUS_LOGIN}",
                 artifacts: [
                     [artifactId: 'vprofileapp',
